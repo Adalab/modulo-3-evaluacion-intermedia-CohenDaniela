@@ -8,6 +8,7 @@ function App (){
 
   const [countriesList, setCountriesList]= useState ([]);
   const [searchConuntries, setSearchCountries] = useState ('');
+  const [searchByContinents, setSearchBycontinents] = useState ('All');
   
 
 
@@ -35,14 +36,23 @@ function App (){
     setSearchCountries(ev.target.value)
 
   }
+  const handleSelectContinent =(ev) => {
+    setSearchBycontinents (ev.target.value)
+  }
 
 
   ///pintar 
 
   const renderCountries = ()=> {
     return countriesList
+    
+   
     .filter ((eachcountry)=> eachcountry.name.common.toLowerCase().includes(searchConuntries.toLowerCase()))
-  
+
+    // .filter ((eachcountry)=> 
+    // eachcountry.continents.includes(searchByContinents) )
+
+    ///falta condicional para que cuando el select esté en All se muestren todos los paises
 
     .map ((eachcountry, index)=> ( <li key={index}
     >
@@ -55,13 +65,9 @@ function App (){
 
 
 
-
-
- 
-
   return (
     <div>
-      <header>
+      <header className='header'>
         <h1>Country Info App</h1>
         <p>Explore information about countries</p>
       </header>
@@ -74,13 +80,21 @@ function App (){
         value={searchConuntries}
         onChange={hadleInput} />
         <label htmlFor=""> By continents</label>
-        <select name="" id="">
-          <option value=""></option>
-          <option value=""></option>
-          <option value=""></option>
-          <option value=""></option>
-          <option value=""></option>
+        <select name="continents" 
+        id="continents"
+        onChange={handleSelectContinent}
+        value={searchByContinents}>
+          <option value='All'>All</option>
+          <option value='Africa'>Africa</option>
+          <option>Asia</option>
+          <option >Europe</option>
+          <option >North America</option>
+          <option >Oceania</option>
+          <option>South America</option>
         </select>
+          
+          
+         
 
       </form>
      </section>
