@@ -7,6 +7,8 @@ function App (){
   ///constantes de estado
 
   const [countriesList, setCountriesList]= useState ([]);
+  const [searchConuntries, setSearchCountries] = useState ('');
+  
 
 
 
@@ -22,11 +24,27 @@ function App (){
     })
 
   }, [])
+  
+  ///funciones manejadoras
+  const handleform = (ev) => {
+    ev.preventDefault
+
+  }
+
+  const hadleInput = (ev) => {
+    setSearchCountries(ev.target.value)
+
+  }
+
 
   ///pintar 
 
   const renderCountries = ()=> {
-    return countriesList.map ((eachcountry, index)=> ( <li key={index}
+    return countriesList
+    .filter ((eachcountry)=> eachcountry.name.common.toLowerCase().includes(searchConuntries.toLowerCase()))
+  
+
+    .map ((eachcountry, index)=> ( <li key={index}
     >
       <span> {eachcountry.flag}  </span>
       <h3>{eachcountry.name.common} </h3>
@@ -49,9 +67,12 @@ function App (){
       </header>
 
      <section>
-     <form>
+     <form onSubmit={handleform}>
         <label htmlFor=""> By countries</label>
-        <input type="text" />
+        <input type="search"
+        name='search'
+        value={searchConuntries}
+        onChange={hadleInput} />
         <label htmlFor=""> By continents</label>
         <select name="" id="">
           <option value=""></option>
